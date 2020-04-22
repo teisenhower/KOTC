@@ -6,4 +6,5 @@
 /bin/
 /var/
 /vendor/
+/.vscode/
 .php_cs.cache

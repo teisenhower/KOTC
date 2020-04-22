@@ -1,7 +1,6 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<h1>Welcome
-		{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-			{{app.user.username}}</h1>
-	{% endif %}
+	<h1>
+		<a href="{{ path('app_search')}}">Find A League</a>
+	</h1>
 {% endblock %}

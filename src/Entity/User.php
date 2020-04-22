@@ -39,10 +39,9 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="id")
+     * @ORM\Column(type="string", length=255)
      */
-    private $leagueId;
+    private $leagueName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,6 +52,17 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+    /**
+      * @ORM\ManyToOne(targetEntity="League", inversedBy="id")
+      */
+    private $league;
+
+    // needed so `player hit` dropdown in add score can be populated
+    public function __toString()
+    {
+        return $this->username;
+    }
 
     public function getId(): ?int
     {
@@ -139,18 +149,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLeagueId(): ?int
-    {
-        return $this->leagueId;
-    }
-
-    public function setLeagueId(int $leagueId): self
-    {
-        $this->leagueId = $leagueId;
-
-        return $this;
-    }
-
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -171,6 +169,42 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getUser(): ?League
+    {
+        return $this->user;
+    }
+
+    public function setUser(?League $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLeagueName(): ?string
+    {
+        return $this->leagueName;
+    }
+
+    public function setLeagueName(string $leagueName): self
+    {
+        $this->leagueName = $leagueName;
+
+        return $this;
+    }
+
+    public function getLeague(): ?League
+    {
+        return $this->league;
+    }
+
+    public function setLeague(?League $league): self
+    {
+        $this->league = $league;
 
         return $this;
     }

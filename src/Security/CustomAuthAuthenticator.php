@@ -95,8 +95,8 @@ class CustomAuthAuthenticator extends AbstractFormLoginAuthenticator implements 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        $user = $token->getUser();
+        return new RedirectResponse($this->urlGenerator->generate('app_league', ['league_name' => $user->getLeagueName()]));
     }
 
     protected function getLoginUrl()
