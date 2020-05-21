@@ -1,10 +1,8 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-*.env
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/bin/
 /var/
 /vendor/
 /.vscode/
