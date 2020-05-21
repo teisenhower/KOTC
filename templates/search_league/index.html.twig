@@ -1,12 +1,13 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<h3>Current Leagues</h3>
-	<ul>
-		{% for league in leagues %}
-			<li>
-				{# <a href="{{ path('league', {league_name: league.leagueName}) }}">{{ league.leagueName }}</a> #}
-				<a href="/league/{{league.leagueName}}">{{ league.leagueName }}</a>
-			</li>
-		{% endfor %}
-	</ul>
+	<section id="leagues">
+		<h1 class="header orange text-center text-shadow">Current Leagues</h1>
+		<ul id="league-list" class="text-center">
+			{% for league in leagues %}
+				<li>
+					<a href="/league/{{league.leagueName}}">{{ league.leagueName }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
 {% endblock %}

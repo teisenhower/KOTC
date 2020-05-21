@@ -12,31 +12,61 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Repository\LeagueRepository;
 use App\Repository\UserRepository;
+use App\Services\SendEmail;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class RegisterController extends AbstractController
 {
     /**
      * @Route("/signup", name="app_signup")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, LeagueRepository $leagueRepository, UserRepository $userRepository)
-    {
+    public function register(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        LeagueRepository $leagueRepository,
+        UserRepository $userRepository,
+        SendEmail $sendEmail
+    ) {
         $form = $this->createFormBuilder()
-            ->add('firstName')
-            ->add('lastName')
-            ->add('username')
-            ->add('email')
+            ->add('firstName', null, ['error_bubbling' => true,])
+            ->add('lastName', null, ['error_bubbling' => true,])
+            ->add('username', null, ['error_bubbling' => true,])
+            ->add(
+                'email',
+                null,
+                [
+                    'error_bubbling' => true,
+                    'constraints' => [
+                        new Email(
+                            [
+                                'message' => 'Please enter a valid email address: {{ value }} is invalid'
+                            ]
+                        )
+                    ]
+                ]
+            )
             ->add(
                 'password',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
                     'required' => true,
-                    'first_options' => ['label' => 'Password'],
-                    'second_options' => ['label' => 'Confirm Password'],
+                    'error_bubbling' => true,
+                    'constraints' => [
+                        new Length(
+                            [
+                                'min' => 8,
+                                'minMessage' => 'Password must be at least 8 characters'
+                            ]
+                        ),
+                    ],
+                    'invalid_message' => 'Passwords do not match',
                 ]
             )
-            ->add('refCode')
+            ->add('refCode', null, ['error_bubbling' => true,])
             ->add('Sign_Up', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
@@ -78,21 +108,24 @@ class RegisterController extends AbstractController
                     ]
                 );
             }
-            $user = new User();
-            $user->setFirstName($data['firstName']);
-            $user->setLastName($data['lastName']);
-            $user->setUsername($data['username']);
-            $user->setEmail($data['email']);
-
-            $user->setLeagueName($league->getLeagueName());
-            $user->setLeague($league);
-            $user->setPassword(
-                $passwordEncoder->encodePassword($user, $data['password'])
-            );
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            return $this->redirectToRoute('app_login');
+            if ($form->isValid()) {
+                $user = new User();
+                $user->setFirstName($data['firstName']);
+                $user->setLastName($data['lastName']);
+                $user->setUsername($data['username']);
+                $user->setEmail($data['email']);
+                
+                $user->setLeagueName($league->getLeagueName());
+                $user->setLeague($league);
+                $user->setPassword(
+                    $passwordEncoder->encodePassword($user, $data['password'])
+                );
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $sendEmail->sendRegistrationEmail($data['email'], $data['firstName'], $data['lastName']);
+                return $this->redirectToRoute('app_login');
+            }
         }
 
         return $this->render(

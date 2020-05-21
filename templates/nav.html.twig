@@ -1,0 +1,43 @@
+<div id="target-button" class="orange">
+	<span id='circle' class='circle1'></span>
+	<span id='circle' class='circle2'></span>
+	<span id='circle' class='circle3'></span>
+</div>
+<nav class="closed">
+	<ul>
+
+		{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+			<li id="nav-user">Hey
+				{{app.user.username}}!
+			</li>
+			<li id="nav-title">Where to next?</li>
+			<li>
+				<a href="{{ path('app_home' )}}">Home</a>
+			</li>
+			<li>
+				<a href="{{ path('app_league', {league_name: app.user.league.leagueName})}}">League Home</a>
+			</li>
+			<li>
+				<a href="{{ path('app_add_score' )}}">Add Sore</a>
+			</li>
+			<hr>
+			<li>
+				<a href="{{ path('app_profile', {username: app.user.username})}}">Profile Settings</a>
+			</li>
+			<li>
+				<a href="{{ path('app_logout' )}}">Logout</a>
+			</li>
+		{% else %}
+			<li id="nav-title">Where to next?</li>
+			<li>
+				<a href="{{ path('app_home' )}}">Home</a>
+			</li>
+			<li>
+				<a href="{{ path('app_login' )}}">Login</a>
+			</li>
+			<li>
+				<a href="{{ path('app_signup' )}}">Sign Up</a>
+			</li>
+		{% endif %}
+	</ul>
+</nav>

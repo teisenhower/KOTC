@@ -1,14 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<div class="example-wrapper">
-		<h1>{{ league }}</h1>
-	</div>
-	<h3>Players In League</h3>
-	<ul>
+	<section id="leaderboard">
+		<h1 class="header orange text-center text-shadow">{{ league }}</h1>
 		{% for user in users %}
-			<li>{{ user.username }}
-				- Score:
-				{{user.total}}</li>
+			<div class="player-block drop-shadow">
+
+				<div id="player-content">
+					<img class="player-headshot" src="{{ asset('build/images/headshot.jpg') }}" alt=" ">
+					<div class="center-content">
+						<div class="player-name orange bold">{{ user.username }}</div>
+						<div class='grey'>
+							{{user.motto}}
+						</div>
+					</div>
+					<div class='player-score right-content text-right orange bold'>
+						{{user.total}}
+					</div>
+				</div>
+				<a href="/user/{{user.username}}" id='profileButton'>
+					<span class="dot hor"></span>
+					<span class="dot hor"></span>
+					<span class="dot hor"></span>
+				</a>
+				<span id="gradient"></span>
+
+			</div>
 		{% endfor %}
-	</ul>
+
+	</section>
 {% endblock %}
+{# <a href="/user/{{ user.username }}">{{ user.username }}</a> #}

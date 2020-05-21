@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<h1>
-		<a href="{{ path('app_search')}}">Find A League</a>
-	</h1>
+	<div class="image-wrapper">
+		<img class='kotc-logo' src="{{ asset('build/images/Logotype.png') }}" alt="ACME logo">
+		<h1 class="find-leaderboard drop-shadow text-center">
+			<a class='grey' href="{{ path('app_search')}}">Find A League Leaderboard</a>
+		</h1>
+	</div>
 {% endblock %}

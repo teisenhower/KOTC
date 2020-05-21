@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div class="example-wrapper">
+		<h1>{{ username }}</h1>
+		{{ form_start(form) }}
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.motto) }}
+			</div>
+			<div class="col" id="some-custom-id">
+				{{ form_row(form.Submit) }}
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "sendgrid/sendgrid": "^7.4",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
@@ -14,6 +15,8 @@
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "5.0.*",
         "symfony/twig-bundle": "5.0.*",
+        "symfony/validator": "5.0.*",
+        "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {

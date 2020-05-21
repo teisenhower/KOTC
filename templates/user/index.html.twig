@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<section id="user">
+		<div id="user-data">
+			<h1 id="player-name" class="orange bold">{{ username }}</h1>
+			<img class="player-headshot drop-shadow" src="{{ asset('build/images/headshot.jpg') }}" alt=" ">
+			<h3 id="player-motto" class="grey light">{{ motto }}</h3>
+		</div>
+		<div id="breakdown" class="drop-shadow">
+			<h2 class="text-center peach">Breakdown</h2>
+			<ul>
+				<li>
+					<span class="breakdown-total orange bold">{{ totals.Assist}}</span>
+					<span class="label">Assists</span>
+				</li>
+				<li>
+					<span class="breakdown-total orange bold">{{ totals.Battle}}</span>
+					<span class="label">Battles</span>
+				</li>
+				<li>
+					<span class="breakdown-total orange bold">{{ totals.Stealth}}</span>
+					<span class="label">Stealths</span>
+				</li>
+			</ul>
+		</div>
+		<div id="hitHistory" class="drop-shadow">
+			<h2 class="text-center peach">Hit History</h2>
+			<ul>
+				<li>
+					<span class='label'>Type</span>
+					<span class='label'>Player Hit</span>
+					<span class='label'>Points</span>
+				</li>
+				{% for hit in hitHistory %}
+					<li class="orange stat">
+						<span>{{ hit.type }}</span>
+						<span>{{ hit.playerHit }}</span>
+						<span>{{ hit.points }}</span>
+						{% if currentUser.username is defined %}
+							{% if username == currentUser.username %}
+								<a href="/delete/{{ hit.id }}">
+									<span class="dot vert"></span>
+									<span class="dot vert"></span>
+									<span class="dot vert"></span>
+								</a>
+							{% endif %}
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div id="topTargets" class="drop-shadow">
+			<h2 class="text-center peach">Top Targets</h2>
+			<ul>
+				<li>
+					<span class='label'>Player</span>
+					<span class='label'>Times Hit</span>
+				</li>
+				{% for target in topTargets %}
+					<li class="orange stat">
+						<span>{{ target.playerHit }}</span>
+						<span>{{ target.times }}</span>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+{% endblock %}

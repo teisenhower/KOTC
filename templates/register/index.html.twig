@@ -3,6 +3,78 @@
 {% block title %}Sign Up!
 {% endblock %}
 {% block body %}
+	<section id="register">
+		<h1 class="header orange text-center">Sign Up</h1>
+		<p class="text-center dark-grey">Welcome!<br>Are you ready to embark on your competitive journey?</p>
 
-	Please Register
-	{{ form(form) }}{% endblock %}
+		{{ form_start(form, {'attr': {'id':'register-form'}}) }}
+		<div id="names">
+			{{form_widget(form.firstName,{
+			'attr' : {
+			'class': 'grey',
+			'placeholder': 'First Name',
+			}
+			})
+			}}
+			{{form_widget(form.lastName,{
+			'attr' : {
+			'class': 'grey',
+			'placeholder': 'Last Name',
+			}
+			})
+			}}
+		</div>
+		{{form_widget(form.username,{
+			'attr' : {
+				'class': 'grey',
+				'placeholder': 'Username',
+			}
+			})
+		}}
+		{{form_widget(form.email,{
+			'attr' : {
+				'class': 'grey',
+				'placeholder': 'Email',
+			}
+			})
+		}}
+		{{form_widget(form.password.first,{
+			'attr' : {
+				'class': 'grey',
+				'placeholder': 'Password',
+			}
+			})
+		}}
+		{{form_widget(form.password.second,{
+			'attr' : {
+				'class': 'grey',
+				'placeholder': 'Confirm Password',
+			}
+			})
+		}}
+		{{ form_errors(form.password.first)}}
+
+		{{ form_errors(form.password.second)}}
+		{{ form_widget(form.refCode,{
+			'attr' : {
+				'class': 'grey',
+				'placeholder': 'Ref Code',
+			}
+			})
+		}}
+
+		{{form_widget(form.Sign_Up,{
+				'id':'register-button',
+			'attr' : {
+				'class': 'inactive dark-grey drop-shadow',
+			}
+			})
+		}}
+		<a href="{{ path('app_login')}}" class="orange semi-bold">Login</a>
+		<div id="errors">
+			{{ form_errors(form)}}
+		</div>
+		{{form_end(form)}}
+
+	</section>
+{% endblock %}

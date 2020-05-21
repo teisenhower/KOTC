@@ -4,41 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<form method="post">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
+	<section id="login">
+		<h1 class="header orange text-center">Login</h1>
+		<p class="text-center dark-grey">Welcome back!<br>Ready to vanquish your enemeies?</p>
 
-		{% if app.user %}
-			<div class="mb-3">
-				You are logged in as
-				{{ app.user.username }},
-				<a href="{{ path('app_logout') }}">Logout</a>
-			</div>
-		{% endif %}
+		<form id="login-form" class="drop-shadow" method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<label for="inputUsername">Username</label>
-		<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-		<label for="inputPassword">Password</label>
-		<input type="password" name="password" id="inputPassword" class="form-control" required>
-
-		<input
-		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		{#
-				        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-				        See https://symfony.com/doc/current/security/remember_me.html
-				
-				        <div class="checkbox mb-3">
-				            <label>
-				                <input type="checkbox" name="_remember_me"> Remember me
-				            </label>
-				        </div>
-				    #}
-
-		<button class="btn btn-lg btn-primary" type="submit">
-			Sign in
-		</button>
-	</form>
+			{% if app.user %}
+				<div class="mb-3">
+					You are logged in as
+					{{ app.user.username }},
+					<a href="{{ path('app_logout') }}">Logout</a>
+				</div>
+			{% endif %}
+			<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control grey" placeholder="Username" required autofocus>
+			<input type="password" name="password" id="inputPassword" class="form-control grey" placeholder="Password" required>
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<span id="button-items">
+				<button id="signin-button" class="drop-shadow dark-grey inactive" type="submit">Let's Go!</button>
+				<a href="{{ path('app_signup')}}" class="orange semi-bold">Sign Up</a>
+				<a href="{{ path('app_recovery')}}" class="orange text-right">I forgot my password</a>
+			</span>
+		</form>
+	</section>
 {% endblock %}

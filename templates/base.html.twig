@@ -2,22 +2,24 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			{% block title %}KOTC
 			{% endblock %}
 		</title>
-		{% block stylesheets %}{% endblock %}
+		{% block stylesheets %}
+			{# 'app' must match the first argument to addEntry() in webpack.config.js #}
+			{{ encore_entry_link_tags('app') }}
+
+		{# Renders a link tag (if your module requires any CSS) #}
+			{# <link rel="stylesheet" href="/build/app.css"> #}
+		{% endblock %}
 	</head>
 	<body>
-		<a href="{{ path('app_home' )}}">Home</a>
-		{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-			<a href="{{ path('app_add_score' )}}">Add Sore</a>
-			<a href="{{ path('app_logout' )}}">Logout</a>
-		{% else %}
-			<a href="{{ path('app_login' )}}">Login</a>
-			<a href="{{ path('app_signup' )}}">Sign Up</a>
-		{% endif %}
+		{% include "nav.html.twig" %}
 		{% block body %}{% endblock %}
-		{% block javascripts %}{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
 	</body>
 </html>

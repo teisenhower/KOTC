@@ -18,4 +18,25 @@ class StatsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Stats::class);
     }
+
+    public function getBreakdown($id)
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb->select('b.type, COUNT(b) as count')
+            ->where('b.player = :id')
+            ->groupBy('b.type')
+            ->setParameter('id', $id);
+        $results = $qb->getQuery()->getResult();
+        return array_column($results, 'count', 'type');
+    }
+    public function getTopTargets($id)
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb->select('b.playerHit, COUNT(b) as times')
+            ->where('b.player = :id')
+            ->groupBy('b.playerHit')
+            ->orderBy('times', 'DESC')
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getResult();
+    }
 }

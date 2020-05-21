@@ -27,7 +27,7 @@ class Stats
     private $playerHit;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
