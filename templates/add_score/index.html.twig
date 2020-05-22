@@ -1,3 +1,36 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	{{ form(form )}}{% endblock %}
+	<section id="addScore">
+		<h1 class="header orange text-center">Add A Hit</h1>
+		<p class="text-center dark-grey">It appears as though you've done well!<br>Add your hit details below!</p>
+		{{ form_start(form, {'attr': {'id':'score-form', 'class':'drop-shadow'}}) }}
+
+		<div class="score-label">Player Hit</div>
+		{{form_widget(form.playerHit,{
+		'attr' : {
+		'class': 'grey',
+		}
+		})
+		}}
+		<div class="score-label">Date</div>
+
+		{{form_widget(form.date,{
+			'attr' : {
+			'class': 'grey',
+			}
+			})
+		}}
+		<div class="score-label">Type</div>
+
+		<div>{{form_widget(form.type)}}</div>
+
+		{{form_widget(form.Submit,{
+				'id':'score-button',
+			'attr' : {
+				'class': 'active blue drop-shadow',
+			}
+			})
+		}}
+		{{form_end(form)}}
+	</section>
+{% endblock %}

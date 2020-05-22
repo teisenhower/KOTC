@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,7 +42,14 @@ class AddScoreType extends AbstractType
                     }
                 ]
             )
-            ->add('date')
+            ->add(
+                'date',
+                DateTimeType::class,
+                [
+                    'years' => ['2020'],
+                    'minutes' => range(0, 60, 5),
+                ]
+            )
             ->add(
                 'type',
                 ChoiceType::class,
@@ -50,10 +58,19 @@ class AddScoreType extends AbstractType
                         'Battle' => 'Battle',
                         'Stealth' => 'Stealth',
                         'Assist' => 'Assist'
-                    ]
+                    ],
+                    'multiple' => false,
+                    'expanded' => true,
+                    // 'choice_label' => false
                 ]
             )
-            ->add('Submit', SubmitType::class);
+            ->add(
+                'Submit',
+                SubmitType::class,
+                [
+                    'label' => 'Add Score'
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

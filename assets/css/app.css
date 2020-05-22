@@ -59,11 +59,22 @@ button {
   border: none;
   background: transparent;
 }
+<<<<<<< HEAD
 input:focus {
   /* clears highlight around input fields */
   outline: none;
 }
 
+=======
+input:focus,
+select:focus {
+  /* clears highlight around input fields */
+  outline: none;
+}
+select option {
+  background: white;
+}
+>>>>>>> update/design
 #nav-title,
 #nav-user {
   font-size: 1.8rem;
@@ -253,10 +264,19 @@ section {
 }
 section#login,
 section#register,
+<<<<<<< HEAD
 section#leagues {
   margin: 12rem 0 0 0;
 }
 section#user {
+=======
+section#leagues,
+section#addScore {
+  margin: 12rem 0 0 0;
+}
+section#user,
+section#profile-settings {
+>>>>>>> update/design
   margin: 6rem 0 0 0;
 }
 section#leaderboard {
@@ -344,7 +364,13 @@ section#user h2 {
 
 /* LOGIN / REGISTER SECTION */
 #login-form,
+<<<<<<< HEAD
 #register-form {
+=======
+#register-form,
+#score-form,
+#motto-form {
+>>>>>>> update/design
   padding: 2.4rem;
   background: white;
 }
@@ -399,6 +425,10 @@ form button.active {
 #register-button {
   margin-right: 3.6rem;
 }
+#score-button {
+  display: block;
+  margin-right: 3.6rem;
+}
 
 /* FORM ERRORS */
 #errors {
@@ -415,6 +445,46 @@ form button.active {
   font-size: 1.2rem;
   line-height: 1.2rem;
   padding-bottom: 1.2rem;
+}
+
+/* ADD SCORE FORM */
+#add_score_type,
+#add_score_date,
+#add_score_playerHit {
+  margin: 1.2rem 0 2.4rem 0;
+}
+#add_score_date select {
+  margin-right: 1.2rem;
+  color: rgb(var(--grey));
+}
+#score-form select {
+  border: 1px solid rgb(var(--dark-grey));
+  background: white;
+  padding: 0.4rem 2.4rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+#add_score_type label {
+  display: inline;
+  line-height: 2.4rem;
+  font-size: 1.2rem;
+  color: rgb(var(--dark-grey));
+  border: 1px solid rgb(var(--dark-grey));
+  padding: 0.4rem 2.4rem;
+  margin-right: 2.4rem;
+}
+#add_score_type input {
+  display: none;
+}
+#add_score_type input[type='radio']:checked + label {
+  background: rgb(var(--peach));
+  color: rgb(var(--orange));
+  border-color: rgb(var(--orange));
+}
+.score-label {
+  font-size: 1.2rem;
+  color: rgb(var(--peach));
+  line-height: 1.2rem;
 }
 
 /* GLOBAL STYLES */

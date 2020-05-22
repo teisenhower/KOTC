@@ -1,17 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<div class="example-wrapper">
-		<h1>{{ username }}</h1>
-		{{ form_start(form) }}
+	<section id="profile-settings">
+		<h1 class="header orange text-center">Settings</h1>
 
-		<div class="row">
-			<div class="col">
-				{{ form_row(form.motto) }}
-			</div>
-			<div class="col" id="some-custom-id">
-				{{ form_row(form.Submit) }}
-			</div>
-		</div>
+		{{ form_start(form, {'attr': {'id':'motto-form', 'class':'drop-shadow'}}) }}
+
+		{{ form_widget(form.motto, {
+			'attr': {
+				'class' : 'grey',
+			}
+		}) }}
+
+		{{ form_widget(form.Submit, {
+			'attr': {
+				'class' : 'active blue drop-shadow'
+			}
+		} )
+		}}
+
 		{{ form_end(form) }}
-	</div>
+
+	</section>
 {% endblock %}

@@ -13,6 +13,22 @@
 
 - Would like to figure out how to return 0 for stat type at sql level
 
+## [0.0.9] - 2020-05-22
+
+## Added
+
+- .env configuration for Fortrabbit deployment
+
+## Changed
+
+- bin directory no longer in .gitignore. Needed for deployment
+- build directory also no longer in .gitigore. Needed for deployment
+- .env.local configuration altered for local dev
+- Add Score and Profile Settings forms styling updated
+- Mins in time field are every 5 instead of every minute
+- Type selection changed from Dropdown selection to radio buttons
+- Year field locked to 2020
+
 ## [0.0.8] - 2020-05-20
 
 ## Added
